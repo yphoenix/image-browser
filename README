@@ -1,0 +1,27 @@
+One file Simple databaseless image browser.
+===========================================
+
+Use: Stick it in the root level of a hierarcy of photos and call it up.
+
+If an image file has a thumbnail in it then extract it and display it.
+If it does not then generate a thumbnail and cache it.
+By forcing the display of the image with a <img> tag to go via this file we can
+protect the directories that the image files are in, scale them, watermark them,
+restrict them accordingly.
+
+http:.../ImageBrowser.php/?p=<sub_directory_path> - display thumbnails in directory
+
+Internally it uses: 
+
+http:.../?p=<sub_directory_path>&i=<image_file>    - display image thumbnail
+http:.../?p=<sub_directory_path>&i=<image_file>&f  - display image preview page.
+http:.../?p=<sub_directory_path>&i=<image_file>&fi - display image preview (callback from <img> tag).
+
+optional arg: &noexif - will cause all EXIF thumbnails to be ignored.
+
+To avoid the display of the PHP filename you can map index.php to it in your .htaccess file.
+
+---
+
+To remove all the generated image thumbs
+sudo find . -name ".thumbs" -exec rm -r -v \{\} \;
